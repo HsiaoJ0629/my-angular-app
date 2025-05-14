@@ -22,7 +22,10 @@ html {
   }
 }
 
-html, body { height: 100%; }
+html, body { 
+  height: 100%; 
+  overflow: hidden;
+}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /* You might want to add more specific styling here for your 'app-root' or other components */
@@ -30,4 +33,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 app-root {
   flex-direction: column;
   // Add padding or margin as needed
+}
+
+mat-card {
+  border-top: 4px solid var(--mat-sys-inverse-primary) !important; /* Adjust thickness (4px) as needed */
 }

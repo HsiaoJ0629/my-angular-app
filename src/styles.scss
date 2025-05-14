@@ -16,6 +16,10 @@ html {
     typography: Roboto, // Use default typography
     density: 0
   )); // Apply the custom theme to all components
+
+  @media (prefers-contrast: more) {
+    @include my-theme.high-contrast-overrides(color-scheme);
+  }
 }
 
 html, body { height: 100%; }

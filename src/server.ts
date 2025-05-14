@@ -60,6 +60,12 @@ if (isMainModule(import.meta.url)) {
   });
 }
 
+// 🔽 Add Ping API
+app.get('/api/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
+
 /**
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.
  */

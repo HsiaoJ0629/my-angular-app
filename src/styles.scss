@@ -10,7 +10,7 @@ html {
   color-scheme: light dark; // Keep light and dark scheme if desired
   @include mat.theme((
     color: (
-   primary: my-theme.$primary-palette,
+      primary: my-theme.$primary-palette,
       tertiary: my-theme.$tertiary-palette,
     ),
     typography: Roboto, // Use default typography

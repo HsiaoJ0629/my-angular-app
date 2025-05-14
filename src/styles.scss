@@ -3,8 +3,15 @@
 @use '@angular/material' as mat;
 @use '../theme-colors' as my-theme;
 
+:root {
+  @include mat.toolbar-overrides((
+    container-background-color: var(--mat-sys-primary-container),
+  ));
 
-
+  @include mat.sidenav-overrides((
+    container-background-color: var(--mat-sys-primary-container),
+  ));
+}
 
 html {
   color-scheme: light dark; // Keep light and dark scheme if desired

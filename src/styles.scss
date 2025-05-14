@@ -3,24 +3,19 @@
 @use '@angular/material' as mat;
 @include mat.core(); // Include Angular Material Core
 
-// Define a custom grey theme
-$my-grey-primary: mat.define-palette(mat.$grey-palette, 700, 500, 900); // Adjust shades as needed
-$my-grey-accent: mat.define-palette(mat.$blue-grey-palette, A200, A100, A400); // Use blue-grey for accent or choose another
-$my-grey-warn: mat.define-palette(mat.$red-palette); // Keep red for errors
 
-$my-grey-theme: mat.define-theme((
-  color: (
-    primary: $my-grey-primary,
-    accent: $my-grey-accent,
-    warn: $my-grey-warn,
-  ),
-  typography: mat.define-typography-config(), // Use default typography
-  density: 0
-));
+
 
 html {
   color-scheme: light dark; // Keep light and dark scheme if desired
-  @include mat.all-component-themes($my-grey-theme); // Apply the custom theme to all components
+  @include mat.theme((
+    color: (
+      primary: mat.$violet-palette,
+      tertiary: mat.$orange-palette
+    ),
+    typography: Roboto, // Use default typography
+    density: 0
+  )); // Apply the custom theme to all components
 }
 
 html, body { height: 100%; }
@@ -29,7 +24,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* You might want to add more specific styling here for your 'app-root' or other components */
 /* For a modern look, consider adjusting spacing, shadows, and borders */
 app-root {
-  display: flex; // Use flexbox for layout
   flex-direction: column;
   // Add padding or margin as needed
 }

@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MaterialModule } from '../modules/material.module';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
@@ -9,15 +9,47 @@ import { MatSidenav } from '@angular/material/sidenav';
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.scss'
 })
-export class SideMenuComponent {
-  @ViewChild('sidenav', {static: true}) sidenav!: MatSidenav;
-  constructor(private router: Router) {}
+export class SideMenuComponent implements OnInit {
+  @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
+  
+  selectedUrl: string = '/home';
+  urls: Path[] = [
+    {path: '/home', name: 'Home'},
+    {path: '/about', name: 'About'},
+    {path: '/contact', name: 'Contact'}
+  ];
+  
+  constructor(
+    private router: Router
+  ) {
+    
+  }
+
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+   
+        for (let url of this.urls) {
+          url.selected = url.path == event.url;
+        }
+         
+      }
+    });
+  }
 
   goTo(url: string) {
     this.router.navigate([url]);
+    this.sidenav.close();
   }
 
   toggleSidenav() {
     this.sidenav.toggle();
   }
+}
+
+
+class Path {
+  path: string = '';
+  name: string = '';
+  selected?: boolean = false;
 }

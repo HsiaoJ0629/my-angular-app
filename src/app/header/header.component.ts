@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MaterialModule } from '../modules/material.module';
 
 @Component({
@@ -8,5 +8,9 @@ import { MaterialModule } from '../modules/material.module';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  @Output() menuToggle = new EventEmitter<void>(); // Output event emitter
 
+  onMenuButtonClick() {
+    this.menuToggle.emit(); // Emit the event when the button is clicked
+  }
 }

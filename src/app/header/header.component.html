@@ -1,5 +1,8 @@
+<!-- src/app/header/header.component.html -->
 <mat-toolbar color="primary">
-  <span>CRM Dashboard</span>
-  <span class="spacer"></span>
-  <button mat-button>Profile</button>
+  <button mat-icon-button (click)="onMenuButtonClick()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My Application</span>
+  <!-- Add other header content here -->
 </mat-toolbar>

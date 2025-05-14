@@ -1,7 +1,7 @@
 
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
-@include mat.core(); // Include Angular Material Core
+@use '../theme-colors' as my-theme;
 
 
 
@@ -10,8 +10,8 @@ html {
   color-scheme: light dark; // Keep light and dark scheme if desired
   @include mat.theme((
     color: (
-      primary: mat.$violet-palette,
-      tertiary: mat.$orange-palette
+   primary: my-theme.$primary-palette,
+      tertiary: my-theme.$tertiary-palette,
     ),
     typography: Roboto, // Use default typography
     density: 0

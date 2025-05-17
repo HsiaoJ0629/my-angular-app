@@ -12,6 +12,11 @@
   @include mat.sidenav-overrides((
     container-background-color: var(--mat-sys-primary-container),
   ));
+
+  @include mat.chips-overrides((
+    outline-color: var(--mat-sys-inverse-primary),
+    elevated-selected-container-color: var(--mat-sys-inverse-primary)
+  ));
 }
 
 html {

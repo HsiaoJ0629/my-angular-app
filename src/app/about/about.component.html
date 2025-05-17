@@ -1,9 +1,11 @@
 <div class="row">
     <div class="col-6">
         <app-summary></app-summary>
+        <div class="m-2"></div>
+        <app-history [selectedSkill]="selectedSkill"></app-history>
     </div>
     <div class="col-6">
-        <app-skills></app-skills>
+        <app-skills (selectSkill)="onSelectSkill($event)"></app-skills>
     </div>
 </div>
 

@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Skills</mat-card-title>
+        <mat-card-title>SKILLS</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <mat-list>
@@ -8,7 +8,7 @@
                 <mat-list-item class="mb-2 pb-2 pt-2" style="height: auto;">
                     <h5 class="mt-0 mb-2">{{skill.category}}</h5>
                     <ng-container *ngFor="let item of skill.items">
-                        <mat-chip>{{item}}</mat-chip>
+                        <mat-chip class="me-1" [highlighted]="selectedSkill === item" (click)="onSelectSkill(item)">{{item}}</mat-chip>
                     </ng-container>
                 </mat-list-item>
             </ng-container>

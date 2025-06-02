@@ -14,9 +14,10 @@ export class SideMenuComponent implements OnInit {
   
   selectedUrl: string = '/home';
   urls: Path[] = [
-    {path: '/home', name: 'Home'},
-    {path: '/about', name: 'About'},
-    {path: '/contact', name: 'Contact'}
+    { path: '/home', name: 'Home'},
+    { path: '/about', name: 'About' },
+    { path: '/contact', name: 'Contact' },
+    { path: '/demo', name: 'Demo' }
   ];
   
   constructor(

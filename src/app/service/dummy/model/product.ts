@@ -1,46 +1,46 @@
-export interface Product {
-  id: number;
-  title: string;
-  description: string;
-  category: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  tags: string[];
-  brand: string;
-  sku: string;
-  weight: number;
-  dimensions: Dimensions;
-  warrantyInformation: string;
-  shippingInformation: string;
-  availabilityStatus: string;
-  reviews: Review[];
-  returnPolicy: string;
-  minimumOrderQuantity: number;
-  meta: Meta;
-  thumbnail: string;
-  images: string[];
+export class Product {
+  id: number = 0;
+  title: string = '';
+  description: string = '';
+  category: string = '';
+  price: number = 0;
+  discountPercentage: number = 0;
+  rating: number = 0;
+  stock: number = 0;
+  tags: string [] = [];
+  brand: string = '';
+  sku: string = '';
+  weight: number = 0;
+  dimensions: Dimensions = new Dimensions();
+  warrantyInformation: string = '';
+  shippingInformation: string = '';
+  availabilityStatus: string = '';
+  reviews: Review[] = [];
+  returnPolicy: string = '';
+  minimumOrderQuantity: number = 0;
+  meta: Meta = new Meta();
+  thumbnail: string = '';
+  images: string[] = [];
 }
 
-export interface Review {
-  rating: number;
-  comment: string;
-  date: string; // keep as string if parsing manually later
-  reviewerName: string;
-  reviewerEmail: string;
+export class Review {
+  rating: number = 0;
+  comment: string = '';
+  date: string = '';
+  reviewerName: string = '';
+  reviewerEmail: string = '';
 }
 
-export interface Dimensions {
-  width: number;
-  height: number;
-  depth: number;
+export class Dimensions {
+  width: number = 0;
+  height: number = 0;
+  depth: number = 0;
 }
 
-export interface Meta {
-  createdAt: string;
-  updatedAt: string;
-  barcode: string;
-  qrCode: string;
+export class Meta {
+  createdAt: string = '';
+  updatedAt: string = '';
+  barcode: string = '';
+  qrCode: string = '';
 }
 

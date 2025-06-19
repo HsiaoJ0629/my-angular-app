@@ -20,6 +20,11 @@ export class DummyService {
     return this.http.get<ProductList>(url);
   }
 
+  searchProducts(searchTerm: string, limit: number, skip?: number): Observable<ProductList> {
+    let url = this.baseUrl + 'products/search?q=' + searchTerm + '&limit=' + limit + (skip ? ('&skip='+skip) : '');
+    return this.http.get<ProductList>(url);
+  }
+
   getProduct(id: number): Observable<Product>{
     return this.http.get<Product>(this.baseUrl + 'products/' + id);
   }

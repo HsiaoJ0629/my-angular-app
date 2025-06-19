@@ -13,8 +13,14 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div class="content">
+    <div #contentRef class="content" (scroll)="onContentScroll($event)">
       <ng-content></ng-content>
+        <button class="go-top-btn"
+          title="Go to Top"  
+          *ngIf="showGoTop"
+          mat-stroked-button (click)="goToTop()">
+          <mat-icon class="m-0">arrow_upward</mat-icon>
+        </button>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

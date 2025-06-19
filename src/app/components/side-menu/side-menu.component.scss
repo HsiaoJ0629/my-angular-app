@@ -7,3 +7,10 @@
   overflow-y: auto;
   max-height: 90vh;
 }
+
+.go-top-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 50%;
+  z-index: 9999;
+}

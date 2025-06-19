@@ -20,15 +20,17 @@ export class DemoComponent implements OnInit {
   dataSource: MatTableDataSource<Product> = new MatTableDataSource<Product>([]);
   displayedColumns: string[] = ['title', 'price', 'stock'];
   pageSize: number = 10;
+  pageSizeOptions: number[] = [5, 10, 30, 100];
   pageIndex: number = 0
   totalLength: number = 0;
   isLoading: boolean = false;
   filterValue: string = '';
+  hasSearch: boolean = false;
   constructor(
     private dummyService: DummyService,
     private dialog: MatDialog
   ) { 
-    this.getProducts();
+    this.searchProducts();
 
   }
 
@@ -50,11 +52,24 @@ export class DemoComponent implements OnInit {
     })
   }
 
+  searchProducts() {
+    this.isLoading = true;
+
+    this.dummyService.searchProducts(this.filterValue, this.pageSize, this.pageIndex * this.pageSize).subscribe(data => {
+      this.dataSource.sort = this.sort;
+      this.dataSource.data = data.products;
+      
+      this.totalLength = data.total;
+      this.isLoading = false;
+
+    })
+  }
+
   onPageEvent(event: any) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
 
-    this.getProducts()
+    this.searchProducts();
   }
 
   applyFilter(event: any) {
@@ -81,6 +96,10 @@ export class DemoComponent implements OnInit {
       
     });
     
+  }
+
+  goToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
 }

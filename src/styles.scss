@@ -51,3 +51,11 @@ app-root {
 mat-card {
   border-top: 4px solid var(--mat-sys-inverse-primary) !important; /* Adjust thickness (4px) as needed */
 }
+
+table tr:hover{
+  background: var(--mat-sys-surface-container-high);
+}
+
+.clickable{
+  cursor: pointer;
+}

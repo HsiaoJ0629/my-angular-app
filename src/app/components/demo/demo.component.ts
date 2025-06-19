@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Product } from '../../service/dummy/model/product';
+import { ProductEditDialogComponent } from '../product-edit-dialog/product-edit-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-demo',
@@ -23,7 +25,8 @@ export class DemoComponent implements OnInit {
   isLoading: boolean = false;
   filterValue: string = '';
   constructor(
-    private dummyService: DummyService
+    private dummyService: DummyService,
+    private dialog: MatDialog
   ) { 
     this.getProducts();
 
@@ -57,6 +60,27 @@ export class DemoComponent implements OnInit {
   applyFilter(event: any) {
     const filterValue = event.target ? (event.target as HTMLInputElement).value : event;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  addProduct() {
+    let newProduct: Product = new Product();
+    this.editProduct(newProduct);
+  }
+
+  editProduct(product: Product) {
+    const dialogRef = this.dialog.open(ProductEditDialogComponent, {
+      minWidth: '40%',
+      maxWidth: '100%',
+      disableClose: true,
+      data: {
+        product: product
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(reponse => {
+      
+    });
+    
   }
 
 }

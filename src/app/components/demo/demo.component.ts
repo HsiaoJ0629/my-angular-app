@@ -88,7 +88,8 @@ export class DemoComponent implements OnInit {
       maxWidth: '100%',
       disableClose: true,
       data: {
-        product: product
+        product: product,
+        title: product.id > 0 ? product.title : 'New Product' 
       }
     });
 

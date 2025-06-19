@@ -1,12 +1,7 @@
 <mat-toolbar>
     <div class="w-100 d-flex align-items-center justify-content-between">
         <div>
-            @if(data.product.id > 0){
-                {{data.product.title}}
-            }
-            @else {
-                New Product
-            }
+         {{data.title}}
         </div>
         <div><button mat-icon-button><mat-icon (click)="cancel()">close</mat-icon></button></div>
     </div>

@@ -23,5 +23,6 @@ export class ProductEditDialogComponent {
 
 
 interface DialogData{
-  product: Product
+  product: Product,
+  title: string
 }

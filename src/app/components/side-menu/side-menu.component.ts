@@ -97,11 +97,14 @@ export class SideMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private setupResizeObserver(): void {
-    this.resizeObserver = new ResizeObserver(() => {
-      this.updateGoTopVisibility();
-    });
+    if (typeof window !== 'undefined' && 'ResizeObserver' in window) { 
 
-    this.resizeObserver.observe(this.contentRef.nativeElement);
+      this.resizeObserver = new ResizeObserver(() => {
+        this.updateGoTopVisibility();
+      });
+  
+      this.resizeObserver.observe(this.contentRef.nativeElement);
+    }
   }
 }
 

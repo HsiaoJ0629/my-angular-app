@@ -59,3 +59,8 @@ table tr:hover{
 .clickable{
   cursor: pointer;
 }
+
+button.tertiary-btn{
+  color: var(--mat-sys-inverse-primary) !important;
+  background: var(--mat-sys-tertiary) !important;
+}

@@ -7,7 +7,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { MaterialModule } from '../modules/material.module';
+import { MaterialModule } from '../../modules/material.module';
 import { Subscription } from 'rxjs';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
-import { SideMenuComponent } from './side-menu/side-menu.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 import { MaterialModule } from './modules/material.module';
 
 @Component({

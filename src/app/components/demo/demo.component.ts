@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DummyService } from '../service/dummy/dummy.service';
-import { MaterialModule } from '../modules/material.module';
+import { DummyService } from '../../service/dummy/dummy.service';
+import { MaterialModule } from '../../modules/material.module';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Product } from '../../service/dummy/model/product';
 
 @Component({
   selector: 'app-demo',
@@ -14,7 +15,7 @@ import { MatSort } from '@angular/material/sort';
 export class DemoComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
+  dataSource: MatTableDataSource<Product> = new MatTableDataSource<Product>([]);
   displayedColumns: string[] = ['title', 'price', 'stock'];
   pageSize: number = 10;
   pageIndex: number = 0

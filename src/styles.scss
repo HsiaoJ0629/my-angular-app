@@ -3,6 +3,7 @@
 @use '@angular/material' as mat;
 @use '../theme-colors' as my-theme;
 @use 'bootstrap/scss/bootstrap';
+@use 'ngx-toastr/toastr';
 
 :root {
   @include mat.toolbar-overrides((
@@ -63,4 +64,8 @@ table tr:hover{
 button.tertiary-btn{
   color: var(--mat-sys-inverse-primary) !important;
   background: var(--mat-sys-tertiary) !important;
+}
+
+.ngx-toastr {
+  width: 30% !important; // Specify toastr-dialog width for all devices
 }

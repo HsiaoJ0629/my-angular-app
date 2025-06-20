@@ -13,7 +13,7 @@
     }
     <mat-form-field class="w-100 mt-3">
         <mat-label>Search</mat-label>
-        <input matInput [(ngModel)]="filterValue" (keyup.enter)="searchProducts()" placeholder="Filter" #input>
+        <input matInput [(ngModel)]="filterValue" (keyup.enter)="searchProducts()" #input>
         <button class="me-2 tertiary-btn" mat-mini-fab matSuffix
             (click)="$event.stopPropagation(); addProduct()">
             <mat-icon>add</mat-icon>
@@ -44,9 +44,9 @@
     
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" 
+            <tr mat-row *matRowDef="let row; let i = index; columns: displayedColumns;" 
                 class="clickable"
-                (click)="editProduct(row)">
+                (click)="editProduct(row, i)">
             </tr>
     
         </table>

@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { Product } from '../../service/dummy/model/product';
 import { ProductEditDialogComponent } from '../product-edit-dialog/product-edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { response } from 'express';
 
 @Component({
   selector: 'app-demo',
@@ -82,7 +83,8 @@ export class DemoComponent implements OnInit {
     this.editProduct(newProduct);
   }
 
-  editProduct(product: Product) {
+  editProduct(product: Product, index?: number) {
+    let oriProduct = JSON.stringify(product);
     const dialogRef = this.dialog.open(ProductEditDialogComponent, {
       minWidth: '40%',
       maxWidth: '100%',
@@ -93,8 +95,21 @@ export class DemoComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(reponse => {
-      
+    dialogRef.afterClosed().subscribe((response: any) => {
+
+      if(!response.save){
+        if(index != undefined){
+          let tempTableData = this.dataSource.data;
+          tempTableData[index] = JSON.parse(oriProduct);
+          this.dataSource.data = tempTableData;
+        }
+      }else{
+        if(!index){
+          let tempTableData = this.dataSource.data;
+          tempTableData.unshift(product);
+          this.dataSource.data = tempTableData;
+        }
+      }
     });
     
   }

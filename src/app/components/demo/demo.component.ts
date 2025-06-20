@@ -114,8 +114,4 @@ export class DemoComponent implements OnInit {
     
   }
 
-  goToTop(): void {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
 }

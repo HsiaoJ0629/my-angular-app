@@ -66,6 +66,10 @@ button.tertiary-btn{
   background: var(--mat-sys-tertiary) !important;
 }
 
+button.tertiary-btn:hover{
+  background: var(--mat-sys-tertiary-container) !important;
+}
+
 .ngx-toastr {
   width: 30% !important; // Specify toastr-dialog width for all devices
 }

@@ -78,7 +78,10 @@ export class SideMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     const distanceToBottom = scrollHeight - (scrollTop + clientHeight);
     const isScrollable = scrollHeight > clientHeight;
 
-    this.showGoTop = isScrollable && distanceToBottom < 300;
+    // Dynamically set threshold as a percentage of the client height
+    const bottomThreshold = clientHeight * 0.1; // 10% of visible area
+
+    this.showGoTop = isScrollable && distanceToBottom < bottomThreshold;
   }
 
   private setupMutationObserver(): void {

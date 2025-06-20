@@ -103,8 +103,8 @@ export class DemoComponent implements OnInit {
           tempTableData[index] = JSON.parse(oriProduct);
           this.dataSource.data = tempTableData;
         }
-      }else{
-        if(!index){
+      } else {
+        if(index == undefined){
           let tempTableData = this.dataSource.data;
           tempTableData.unshift(product);
           this.dataSource.data = tempTableData;

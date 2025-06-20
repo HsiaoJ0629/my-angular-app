@@ -1,8 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../modules/material.module';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Product } from '../../service/dummy/model/product';
 import { DummyService } from '../../service/dummy/dummy.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-product-edit-dialog',
@@ -11,7 +12,7 @@ import { DummyService } from '../../service/dummy/dummy.service';
   styleUrl: './product-edit-dialog.component.scss'
 })
 export class ProductEditDialogComponent {
-
+  @ViewChild('productForm') productForm!: NgForm;
   isSave: boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,

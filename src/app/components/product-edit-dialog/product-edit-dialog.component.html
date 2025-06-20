@@ -1,29 +1,34 @@
 <mat-toolbar>
-    <div class="w-100 d-flex align-items-center justify-content-between">
-        <div>
-         {{data.title}}
-        </div>
-        <div><button mat-icon-button><mat-icon (click)="close()">close</mat-icon></button></div>
+  <div class="w-100 d-flex align-items-center justify-content-between">
+    <div>
+      {{data.title}}
     </div>
+    <div><button mat-icon-button><mat-icon (click)="close()">close</mat-icon></button></div>
+  </div>
 </mat-toolbar>
-<mat-dialog-content>
+<form #productForm="ngForm" (ngSubmit)="productForm.valid && save()">
+  <mat-dialog-content>
     <div class="row">
-        <mat-form-field class="col-md-12" [appearance]="'outline'">
-            <mat-label>Title</mat-label>
-            <input name="title" matInput [(ngModel)]="data.product.title">
-        </mat-form-field>
-        <mat-form-field class="col-md-6" [appearance]="'outline'">
-            <mat-label>Price</mat-label>
-            <span matTextPrefix>$ &nbsp;</span>
-            <input type="number" name="price" matInput [(ngModel)]="data.product.price">
-        </mat-form-field>
-        <mat-form-field class="col-md-6" [appearance]="'outline'">
-            <mat-label>Stock</mat-label>
-            <input type="number" name="stock" matInput [(ngModel)]="data.product.stock">
-        </mat-form-field>
+      <mat-form-field class="col-md-12 mb-1" [appearance]="'outline'">
+        <mat-label>Title</mat-label>
+        <input name="title" matInput [(ngModel)]="data.product.title" required>
+        <mat-error>Title is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-md-6" [appearance]="'outline'">
+        <mat-label>Price</mat-label>
+        <span matTextPrefix>$ &nbsp;</span>
+        <input type="number" name="price" matInput min="1" [(ngModel)]="data.product.price">
+        <mat-error>Price must be greater than 0</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-md-6" [appearance]="'outline'">
+        <mat-label>Stock</mat-label>
+        <input type="number" name="stock" matInput min="1" [(ngModel)]="data.product.stock">
+        <mat-error>Stock must be greater than 0</mat-error>
+      </mat-form-field>
     </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-flat-button (click)="save()">Save</button>
-    <button mat-stroked-button (click)="close()">Close</button>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-flat-button type="submit">Save</button>
+    <button mat-stroked-button type="button" (click)="close()">Close</button>
+  </mat-dialog-actions>
+</form>

@@ -78,6 +78,7 @@ export class HistoryComponent implements OnChanges, OnInit, OnDestroy {
         'Node.js',
         'Express.js',
         'PostgreSQL',
+        'GIT',
         'RESTful APIs',
       ],
       isOpen: false,

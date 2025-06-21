@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } fr
 import { MaterialModule } from '../../modules/material.module';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-side-menu',
@@ -19,10 +20,12 @@ export class SideMenuComponent implements OnInit, AfterViewInit, OnDestroy {
     { path: '/demo', name: 'Demo' }
   ];
   showGoTop: boolean = false;
+  isMobile: boolean = false;
   private mutationObserver!: MutationObserver;
   private resizeObserver!: ResizeObserver;
   constructor(
-    private router: Router
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
   ) {
     
   }
@@ -37,6 +40,11 @@ export class SideMenuComponent implements OnInit, AfterViewInit, OnDestroy {
          
       }
     });
+
+    this.breakpointObserver.observe([Breakpoints.Handset])
+      .subscribe(result => {
+        this.isMobile = result.matches;
+      });
   }
 
   ngAfterViewInit(): void {

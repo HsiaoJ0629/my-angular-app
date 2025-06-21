@@ -1,6 +1,8 @@
 <!-- src/app/side-menu/side-menu.component.html -->
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="side" opened>
+  <mat-sidenav #sidenav 
+    mode="side"
+    [opened]="!isMobile">
     <mat-nav-list>
       <ng-container *ngFor="let url of urls">
         <a mat-list-item 

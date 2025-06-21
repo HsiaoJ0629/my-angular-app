@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { MaterialModule } from '../../modules/material.module';
 import { Subscription } from 'rxjs';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-history',
@@ -21,6 +22,7 @@ export class HistoryComponent implements OnChanges, OnInit {
   @Input() selectedSkill!: string;
 
   isHighlight: boolean = false;
+  isMobile: boolean = false;
 
   workHistorys: WorkHistory[] = [
     {
@@ -88,7 +90,9 @@ export class HistoryComponent implements OnChanges, OnInit {
   ];
 
 
-  constructor() { }
+  constructor(
+    private breakpointObserver: BreakpointObserver
+  ) { }
   
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedSkill']) {
@@ -105,7 +109,11 @@ export class HistoryComponent implements OnChanges, OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.breakpointObserver.observe(['(max-width: 768px)']).subscribe(result => {
+      this.isMobile = result.matches;
+    });
+  }
 
   displayDate(wh: WorkHistory) {
     return wh.start_year + ' - ' + wh.end_year;

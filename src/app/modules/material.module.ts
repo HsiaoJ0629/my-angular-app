@@ -16,6 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    LayoutModule
   ]
 })
 export class MaterialModule { }

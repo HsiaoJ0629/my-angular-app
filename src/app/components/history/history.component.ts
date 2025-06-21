@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './history.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HistoryComponent implements OnChanges, OnInit, OnDestroy {
+export class HistoryComponent implements OnChanges, OnInit {
   @Input() selectedSkill!: string;
 
   isHighlight: boolean = false;
@@ -85,7 +85,6 @@ export class HistoryComponent implements OnChanges, OnInit, OnDestroy {
     },
   ];
 
-  private highlightSub?: Subscription;
 
   constructor() { }
   
@@ -105,10 +104,6 @@ export class HistoryComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {}
-
-  ngOnDestroy(): void {
-    this.highlightSub?.unsubscribe();
-  }
 
   displayDate(wh: WorkHistory) {
     return wh.start_year + ' - ' + wh.end_year;

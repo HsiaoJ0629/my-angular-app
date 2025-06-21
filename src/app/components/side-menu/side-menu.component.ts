@@ -12,11 +12,10 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class SideMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
   @ViewChild('contentRef') contentRef!: ElementRef<HTMLElement>;
-  selectedUrl: string = '/home';
   urls: Path[] = [
     { path: '/home', name: 'Home'},
-    { path: '/about', name: 'About' },
-    { path: '/contact', name: 'Contact' },
+    { path: '/about', name: 'About me' },
+    { path: '/contact', name: 'Contact me' },
     { path: '/demo', name: 'Demo' }
   ];
   showGoTop: boolean = false;

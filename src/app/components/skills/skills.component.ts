@@ -29,7 +29,7 @@ export class SkillsComponent {
     },
     {
       category: 'Tools and Technologies',
-      items: ['Docker', 'GIT', 'WildFly'],
+      items: ['Docker', 'GIT', 'WildFly', 'AWS S3', 'AWS Textract'],
     },
     {
       category: 'Development Practices',

@@ -52,6 +52,8 @@ export class HistoryComponent implements OnChanges, OnInit {
         'RESTful APIs',
         'Agile Development',
         'Microservices Architecture',
+        'AWS S3',
+        'AWS Textract'
       ],
       isOpen: false,
     },

@@ -24,7 +24,14 @@
         </button>
     </mat-form-field>
     
-
+    <mat-paginator 
+            (page)="onPageEvent($event)"
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [length]="totalLength"
+            [pageSizeOptions]="pageSizeOptions"
+            aria-label="Select page">
+    </mat-paginator>
     <table mat-table [dataSource]="dataSource"
         matSort>
         <ng-container matColumnDef="title">
@@ -50,13 +57,5 @@
         </tr>
 
     </table>
-    <mat-paginator 
-            (page)="onPageEvent($event)"
-            [pageSize]="pageSize"
-            [pageIndex]="pageIndex"
-            [length]="totalLength"
-            [pageSizeOptions]="pageSizeOptions"
-            aria-label="Select page">
-    </mat-paginator>
   </mat-card-content>
 </mat-card>

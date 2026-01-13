@@ -58,6 +58,56 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
+## Deploying to GitHub Pages
+
+This project is configured for deployment to GitHub Pages. There are two methods available:
+
+### Method 1: Automatic Deployment with GitHub Actions (Recommended)
+
+1. **Enable GitHub Pages in your repository:**
+   - Go to your repository on GitHub
+   - Navigate to **Settings** → **Pages**
+   - Under **Source**, select **GitHub Actions**
+
+2. **Push your code to GitHub:**
+   ```bash
+   git add .
+   git commit -m "Configure GitHub Pages deployment"
+   git push origin main
+   ```
+
+3. **The workflow will automatically:**
+   - Build your Angular app for static hosting
+   - Deploy it to GitHub Pages
+   - Your site will be available at `https://[username].github.io/my-angular-app/`
+
+**Note:** The workflow triggers on pushes to the `main` branch. If your default branch is `master`, update `.github/workflows/deploy.yml` to use `master` instead.
+
+### Method 2: Manual Deployment
+
+1. **Build for GitHub Pages:**
+   ```bash
+   npm run build:ghpages
+   ```
+
+2. **Deploy using angular-cli-ghpages:**
+   ```bash
+   npm run deploy:ghpages
+   ```
+
+   On first deployment, you may be prompted to authenticate with GitHub.
+
+3. **Configure GitHub Pages:**
+   - Go to your repository on GitHub
+   - Navigate to **Settings** → **Pages**
+   - Under **Source**, select the `gh-pages` branch and `/ (root)` folder
+
+### Important Notes
+
+- **Base Href:** The app is configured with base href `/my-angular-app/` for GitHub Pages. If your repository has a different name, update the `--base-href` flag in `package.json` scripts.
+- **Custom Domain:** If you're using a custom domain, change the base href to `/` in the build script.
+- **SSR:** GitHub Pages only supports static sites, so SSR is disabled for the `ghpages` build configuration.
+
 ## Running unit tests
 
 To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:

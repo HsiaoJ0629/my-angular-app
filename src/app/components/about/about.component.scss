@@ -1,0 +1,83 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+}
+
+.about-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.about-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.left-column {
+  gap: 1.5rem;
+}
+
+.right-column {
+  // Skills column
+}
+
+.spacing {
+  margin: 1rem 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 968px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .about-container {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 1rem 0.75rem;
+  }
+  
+  .about-grid {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-container {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .about-grid {
+    gap: 0.75rem;
+  }
+  
+  .left-column {
+    gap: 1rem;
+  }
+}

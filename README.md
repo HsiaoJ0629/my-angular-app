@@ -1,6 +1,28 @@
-# MyAngularApp
+# Arthur Hsiao - Full Stack Developer Portfolio
+
+A professional portfolio website showcasing my skills, experience, and projects. Built with Angular 19, Angular Material, and modern web technologies.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+
+## Features
+
+- **Professional Home Page** with hero section and quick stats
+- **About Me** section with professional summary, skills, and work history
+- **Interactive Demo** showcasing full-stack development capabilities
+- **Contact Page** with email, LinkedIn, and GitHub links
+- **Responsive Design** optimized for all devices
+- **Server-Side Rendering (SSR)** for better SEO and performance
+- **Modern UI/UX** with smooth animations and Material Design
+
+## Important: Update Your Information
+
+Before deploying, make sure to update:
+
+1. **Contact Component** (`src/app/components/contact/contact.component.ts`):
+   - Update `linkedInUrl` with your actual LinkedIn profile URL
+   - Update `githubUrl` with your actual GitHub profile URL
+
+2. **Personal Information**: Review and update all personal details throughout the application to match your current information.
 
 ## Development server
 

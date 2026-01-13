@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -23,6 +24,7 @@ export class HistoryComponent implements OnChanges, OnInit {
 
   isHighlight: boolean = false;
   isMobile: boolean = false;
+  animationKey: number = 0; // Used to force animation restart
 
   workHistorys: WorkHistory[] = [
     {
@@ -91,7 +93,8 @@ export class HistoryComponent implements OnChanges, OnInit {
 
 
   constructor(
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private cdr: ChangeDetectorRef
   ) { }
   
   ngOnChanges(changes: SimpleChanges): void {
@@ -105,7 +108,25 @@ export class HistoryComponent implements OnChanges, OnInit {
         }
       }
 
-      this.isHighlight = this.workHistorys.every((wh) => wh.isOpen);
+      const shouldHighlight = this.workHistorys.every((wh) => wh.isOpen);
+      
+      if (shouldHighlight) {
+        // First, remove highlight and animation to reset
+        this.isHighlight = false;
+        this.animationKey = 0;
+        this.cdr.markForCheck();
+        
+        // Then add highlight and trigger animation after DOM updates
+        setTimeout(() => {
+          this.isHighlight = true;
+          this.animationKey = Date.now(); // Use timestamp to ensure unique value
+          this.cdr.markForCheck();
+        }, 20);
+      } else {
+        this.isHighlight = false;
+        this.animationKey = 0;
+        this.cdr.markForCheck();
+      }
     }
   }
 

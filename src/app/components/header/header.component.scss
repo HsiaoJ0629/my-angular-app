@@ -1,3 +1,28 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+.header-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-title {
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.header-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+@media (max-width: 600px) {
+  .header-subtitle {
+    display: none;
+  }
+}

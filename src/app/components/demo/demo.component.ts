@@ -7,7 +7,6 @@ import { MatSort } from '@angular/material/sort';
 import { Product } from '../../service/dummy/model/product';
 import { ProductEditDialogComponent } from '../product-edit-dialog/product-edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { response } from 'express';
 
 @Component({
   selector: 'app-demo',

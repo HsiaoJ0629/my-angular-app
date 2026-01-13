@@ -1,4 +1,4 @@
-<mat-card [class.history-card]="isHighlight">
+<mat-card [class.history-card]="isHighlight" [class.flash-animation]="isHighlight && animationKey > 0" [attr.data-animation-key]="animationKey">
   <mat-card-header>
     <mat-card-title>WORK HISTORY</mat-card-title>
   </mat-card-header>

@@ -1,8 +1,56 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Products</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div class="demo-container">
+  <mat-card class="demo-intro-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="section-icon">code</mat-icon>
+        Interactive Demo - Product Management System
+      </mat-card-title>
+      <mat-card-subtitle>Showcasing Full Stack Development Skills</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="demo-description">
+        This interactive demo demonstrates my ability to build modern web applications with 
+        <strong>Angular</strong>, <strong>Material Design</strong>, and <strong>RESTful APIs</strong>. 
+        It features real-time search, pagination, sorting, and CRUD operations using the DummyJSON API.
+      </p>
+      <div class="demo-features">
+        <mat-chip>
+          <mat-icon>search</mat-icon>
+          Real-time Search
+        </mat-chip>
+        <mat-chip>
+          <mat-icon>sort</mat-icon>
+          Dynamic Sorting
+        </mat-chip>
+        <mat-chip>
+          <mat-icon>view_list</mat-icon>
+          Pagination
+        </mat-chip>
+        <mat-chip>
+          <mat-icon>add_circle</mat-icon>
+          CRUD Operations
+        </mat-chip>
+        <mat-chip>
+          <mat-icon>api</mat-icon>
+          RESTful API Integration
+        </mat-chip>
+        <mat-chip>
+          <mat-icon>phone_android</mat-icon>
+          Responsive Design
+        </mat-chip>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="demo-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="section-icon">inventory</mat-icon>
+        Product Management
+      </mat-card-title>
+      <mat-card-subtitle>Search, view, and manage products</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
     @if (isLoading) {
         <div class="example-loading-shade">
         @if (isLoading) {
@@ -57,5 +105,6 @@
         </tr>
 
     </table>
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>

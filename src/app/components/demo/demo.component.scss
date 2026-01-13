@@ -1,3 +1,53 @@
+.demo-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.demo-intro-card {
+  margin-bottom: 2rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.section-icon {
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  color: var(--mat-sys-inverse-primary);
+}
+
+.demo-description {
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: var(--mat-sys-on-surface);
+  
+  strong {
+    color: var(--mat-sys-inverse-primary);
+    font-weight: 500;
+  }
+}
+
+.demo-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  
+  mat-chip {
+    mat-icon {
+      margin-right: 0.5rem;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.demo-card {
+  position: relative;
+  animation: fadeInUp 0.6s ease-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
 .example-loading-shade {
   position: absolute;
   top: 0;
@@ -9,4 +59,70 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  margin-top: 1rem;
+  overflow-x: auto;
+  display: block;
+  
+  @media (min-width: 769px) {
+    display: table;
+  }
+}
+
+// Ensure table is scrollable on mobile
+@media (max-width: 768px) {
+  .demo-card mat-card-content {
+    overflow-x: auto;
+  }
+  
+  table {
+    min-width: 600px; // Minimum width to prevent cramping
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .demo-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .demo-features {
+    mat-chip {
+      font-size: 0.85rem;
+      
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+  
+  .demo-description {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .demo-container {
+    padding: 0.75rem 0.25rem;
+  }
+  
+  mat-form-field {
+    font-size: 0.9rem;
+  }
 }

@@ -1,6 +1,24 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+mat-card {
+  animation: fadeInUp 0.6s ease-out;
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 mat-card.history-card {
-  box-shadow: 0 2px 6px #9ecaff, 0 1px 3px #9ecaff;
-  animation: shadowFade 3s ease-in-out forwards;
+  // Base shadow when highlighted
+  box-shadow: 0 2px 6px rgba(158, 202, 255, 0.3), 0 1px 3px rgba(158, 202, 255, 0.2);
+}
+
+// Apply flash animation when highlighted
+mat-card.history-card.flash-animation {
+  animation: shadowFade 3s ease-in-out, fadeInUp 0.6s ease-out;
 }
 
 @keyframes shadowFade {
@@ -12,5 +30,35 @@ mat-card.history-card {
   }
   100% {
     box-shadow: 0 0 0 rgba(158, 202, 255, 0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+mat-expansion-panel {
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+}
+
+ul {
+  padding-left: 1.5rem;
+  
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+    color: var(--mat-sys-on-surface);
   }
 }

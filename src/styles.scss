@@ -73,4 +73,14 @@ button.tertiary-btn:hover{
 
 .ngx-toastr {
   width: 30% !important; // Specify toastr-dialog width for all devices
+  
+  @media (max-width: 768px) {
+    width: 90% !important; // Full width on mobile with small margins
+    max-width: 400px !important;
+  }
+  
+  @media (max-width: 480px) {
+    width: 95% !important;
+    font-size: 0.9rem !important;
+  }
 }

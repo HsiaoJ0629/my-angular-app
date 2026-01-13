@@ -1,11 +1,54 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>My Contact Details</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="mt-3">
-    <div class="d-flex align-items-center">
-      <mat-icon class="me-2">email</mat-icon>
-      <a [href]="'mailto:' + email">{{email}}</a>
-    </div>
-  </mat-card-content>
-</mat-card>
+<div class="contact-container">
+  <mat-card class="contact-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="section-icon">contact_mail</mat-icon>
+        Get In Touch
+      </mat-card-title>
+      <mat-card-subtitle>I'm always open to discussing new opportunities and interesting projects</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="contact-info">
+        <div class="contact-item" (click)="openEmail()">
+          <div class="contact-icon-wrapper email">
+            <mat-icon>email</mat-icon>
+          </div>
+          <div class="contact-details">
+            <h3>Email</h3>
+            <p>{{email}}</p>
+            <span class="contact-action">Click to send an email</span>
+          </div>
+        </div>
+
+        <div class="contact-item" (click)="openLinkedIn()">
+          <div class="contact-icon-wrapper linkedin">
+            <mat-icon>work</mat-icon>
+          </div>
+          <div class="contact-details">
+            <h3>LinkedIn</h3>
+            <p>Connect with me on LinkedIn</p>
+            <span class="contact-action">View my professional profile</span>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="availability-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="section-icon">schedule</mat-icon>
+        Availability
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>I'm currently open to new opportunities and would love to hear from you. 
+         Whether you have a project in mind, a job opportunity, or just want to connect, 
+         feel free to reach out!</p>
+      <div class="availability-status">
+        <mat-icon class="status-icon">check_circle</mat-icon>
+        <span>Available for new opportunities</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

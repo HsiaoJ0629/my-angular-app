@@ -1,0 +1,63 @@
+/**
+ * The small set of layout utilities this app uses.
+ *
+ * These were previously provided by Bootstrap. Pulling in a second design
+ * system alongside Angular Material cost ~245 kB of CSS and introduced
+ * deprecated Sass `@import` rules, for the eleven classes defined below.
+ */
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
+.me-2 {
+  margin-inline-end: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+/* A minimal 12-column grid, matching the Bootstrap class names it replaces. */
+$grid-gutter: 1.5rem;
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: calc($grid-gutter / -2);
+
+  > [class^='col-'] {
+    padding-inline: calc($grid-gutter / 2);
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-6 {
+    width: 50%;
+  }
+
+  .col-md-12 {
+    width: 100%;
+  }
+}

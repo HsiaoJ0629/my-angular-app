@@ -1,86 +1,129 @@
-
-/* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 @use '../theme-colors' as my-theme;
-@use 'bootstrap/scss/bootstrap';
 @use 'ngx-toastr/toastr';
 
+@use 'styles/layout-utilities';
+
 :root {
-  @include mat.toolbar-overrides((
-    container-background-color: var(--mat-sys-primary-container),
-  ));
+  /** Height of the sticky toolbar, used to size the scrolling content area. */
+  --app-toolbar-height: 64px;
 
-  @include mat.sidenav-overrides((
-    container-background-color: var(--mat-sys-primary-container),
-  ));
+  @include mat.toolbar-overrides(
+    (
+      container-background-color: var(--mat-sys-primary-container),
+    )
+  );
 
-  @include mat.chips-overrides((
-    outline-color: var(--mat-sys-inverse-primary),
-    elevated-selected-container-color: var(--mat-sys-inverse-primary)
-  ));
+  @include mat.sidenav-overrides(
+    (
+      container-background-color: var(--mat-sys-primary-container),
+    )
+  );
+
+  @include mat.chips-overrides(
+    (
+      outline-color: var(--mat-sys-inverse-primary),
+      elevated-selected-container-color: var(--mat-sys-inverse-primary),
+    )
+  );
+
+  @media (max-width: 599px) {
+    --app-toolbar-height: 56px;
+  }
 }
 
 html {
-  color-scheme: light dark; // Keep light and dark scheme if desired
-  @include mat.theme((
-    color: (
-      primary: my-theme.$primary-palette,
-      tertiary: my-theme.$tertiary-palette,
-    ),
-    typography: Roboto, // Use default typography
-    density: 0
-  )); // Apply the custom theme to all components
+  color-scheme: light dark;
+  @include mat.theme(
+    (
+      color: (
+        primary: my-theme.$primary-palette,
+        tertiary: my-theme.$tertiary-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
 
   @media (prefers-contrast: more) {
     @include my-theme.high-contrast-overrides(color-scheme);
   }
 }
 
-html, body { 
-  height: 100%; 
+html,
+body {
+  height: 100%;
   overflow: hidden;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-/* You might want to add more specific styling here for your 'app-root' or other components */
-/* For a modern look, consider adjusting spacing, shadows, and borders */
-app-root {
-  flex-direction: column;
-  // Add padding or margin as needed
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/**
+ * Visible to screen readers only. Used for headings and status text that give
+ * assistive technology the structure sighted users get from the visual design.
+ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 mat-card {
-  border-top: 4px solid var(--mat-sys-inverse-primary) !important; /* Adjust thickness (4px) as needed */
+  border-top: 4px solid var(--mat-sys-inverse-primary) !important;
 }
 
-table tr:hover{
+table tr:hover {
   background: var(--mat-sys-surface-container-high);
 }
 
 .clickable,
-.clickable .mdc-evolution-chip__text-label{
+.clickable .mdc-evolution-chip__text-label {
   cursor: pointer;
 }
 
-button.tertiary-btn{
+button.tertiary-btn {
   color: var(--mat-sys-inverse-primary) !important;
   background: var(--mat-sys-tertiary) !important;
 }
 
-button.tertiary-btn:hover{
+button.tertiary-btn:hover {
   background: var(--mat-sys-tertiary-container) !important;
 }
 
 .ngx-toastr {
-  width: 30% !important; // Specify toastr-dialog width for all devices
-  
+  width: 30% !important;
+
   @media (max-width: 768px) {
-    width: 90% !important; // Full width on mobile with small margins
+    width: 90% !important;
     max-width: 400px !important;
   }
-  
+
   @media (max-width: 480px) {
     width: 95% !important;
     font-size: 0.9rem !important;
+  }
+}
+
+/**
+ * Respect the OS "reduce motion" setting. The site leans on entrance animations
+ * and transitions, which can trigger discomfort for motion-sensitive users.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

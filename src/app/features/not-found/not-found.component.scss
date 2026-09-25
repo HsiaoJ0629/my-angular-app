@@ -1,0 +1,32 @@
+.not-found-container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.not-found-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.not-found-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: var(--mat-sys-inverse-primary);
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+p {
+  margin: 0;
+  line-height: 1.7;
+  opacity: 0.85;
+}

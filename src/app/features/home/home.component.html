@@ -1,0 +1,135 @@
+<div class="home-container">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Hi, I'm <span class="highlight">{{ site.name }}</span>
+      </h1>
+      <p class="hero-subtitle">{{ site.role }}</p>
+      <p class="hero-description">
+        {{ site.yearsExperience }}+ years building the systems behind lending and healthcare — loan
+        origination, OCR automation, multi-factor authentication and open-banking integrations — in
+        Angular, Spring Boot and Node.js. I own features from schema to production, and I make the
+        teams around me faster.
+      </p>
+      <div class="hero-actions">
+        <a mat-flat-button routerLink="/projects" class="hero-btn">
+          <mat-icon>work</mat-icon>
+          See my projects
+        </a>
+        <a mat-stroked-button routerLink="/mfa-demo" class="hero-btn">
+          <mat-icon>verified_user</mat-icon>
+          Try the MFA demo
+        </a>
+        <a mat-stroked-button routerLink="/about" class="hero-btn">
+          <mat-icon>person</mat-icon>
+          About me
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-section" aria-labelledby="impact-heading">
+    <h2 id="impact-heading" class="visually-hidden">Impact at a glance</h2>
+    @for (metric of metrics; track metric.label) {
+      <mat-card class="stat-card">
+        <mat-card-content>
+          <p class="stat-number">{{ metric.value }}</p>
+          <p class="stat-label">{{ metric.label }}</p>
+          <p class="stat-source">{{ metric.source }}</p>
+        </mat-card-content>
+      </mat-card>
+    }
+  </section>
+
+  <section class="featured-section" aria-labelledby="featured-heading">
+    <div class="section-heading">
+      <h2 id="featured-heading">
+        <mat-icon class="section-icon">work</mat-icon>
+        Selected work
+      </h2>
+      <a mat-button routerLink="/projects">All projects</a>
+    </div>
+    <div class="featured-grid">
+      @for (study of featured; track study.slug) {
+        <mat-card class="featured-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar class="featured-icon">{{ study.icon }}</mat-icon>
+            <h3 mat-card-title>{{ study.title }}</h3>
+            <mat-card-subtitle>{{ study.company }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ study.summary }}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <a mat-button routerLink="/projects" [fragment]="study.slug">
+              Read the case study
+              <span class="visually-hidden">: {{ study.title }}</span>
+            </a>
+            @if (study.demoRoute) {
+              <a mat-button [routerLink]="study.demoRoute">Live demo</a>
+            }
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  </section>
+
+  <mat-card class="features-card">
+    <mat-card-header>
+      <h2 mat-card-title>
+        <mat-icon class="section-icon">star</mat-icon>
+        What I do
+      </h2>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="features-grid">
+        @for (capability of capabilities; track capability.title) {
+          <div class="feature-item">
+            <mat-icon class="feature-icon">{{ capability.icon }}</mat-icon>
+            <h3>{{ capability.title }}</h3>
+            <p>{{ capability.description }}</p>
+          </div>
+        }
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="portfolio-card">
+    <mat-card-header>
+      <h2 mat-card-title>
+        <mat-icon class="section-icon">description</mat-icon>
+        About this site
+      </h2>
+      <mat-card-subtitle>The site itself is a code sample</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="portfolio-description">{{ portfolioDescription }}</p>
+
+      <div class="tech-stack-section">
+        <h3 class="tech-stack-title">
+          <mat-icon class="tech-icon">build</mat-icon>
+          Built with
+        </h3>
+        <mat-chip-set class="tech-list" aria-label="Technologies used to build this site">
+          @for (tech of portfolioTech; track tech) {
+            <mat-chip class="tech-chip">
+              <mat-icon class="chip-icon">check_circle</mat-icon>
+              {{ tech }}
+            </mat-chip>
+          }
+        </mat-chip-set>
+      </div>
+      <a
+        mat-stroked-button
+        class="source-link"
+        [href]="site.repoUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <mat-icon>code</mat-icon>
+        View the source on GitHub
+        <span class="visually-hidden">(opens in a new tab)</span>
+      </a>
+    </mat-card-content>
+  </mat-card>
+</div>

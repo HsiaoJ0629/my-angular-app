@@ -1,0 +1,60 @@
+<div class="contact-container">
+  <mat-card class="contact-card">
+    <mat-card-header>
+      <h1 mat-card-title>
+        <mat-icon class="section-icon">contact_mail</mat-icon>
+        Get in touch
+      </h1>
+      <mat-card-subtitle>
+        I'm always open to discussing new opportunities and interesting projects.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <ul class="contact-info">
+        @for (channel of channels; track channel.key) {
+          <li>
+            <a
+              class="contact-item"
+              [href]="channel.href"
+              [attr.target]="channel.external ? '_blank' : null"
+              [attr.rel]="channel.external ? 'noopener noreferrer' : null"
+            >
+              <span class="contact-icon-wrapper" [class]="channel.key">
+                <mat-icon>{{ channel.icon }}</mat-icon>
+              </span>
+              <span class="contact-details">
+                <span class="contact-label">{{ channel.label }}</span>
+                <span class="contact-value">{{ channel.value }}</span>
+                <span class="contact-action">
+                  {{ channel.action }}
+                  @if (channel.external) {
+                    <span class="visually-hidden">(opens in a new tab)</span>
+                  }
+                </span>
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="availability-card">
+    <mat-card-header>
+      <h2 mat-card-title>
+        <mat-icon class="section-icon">schedule</mat-icon>
+        Availability
+      </h2>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        I'm currently open to new opportunities and would love to hear from you. Whether you have a
+        project in mind, a role to fill, or just want to connect, feel free to reach out.
+      </p>
+      <p class="availability-status">
+        <mat-icon class="status-icon">check_circle</mat-icon>
+        <span>Available for new opportunities</span>
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

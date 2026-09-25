@@ -1,0 +1,57 @@
+<div class="projects-container">
+  <header class="page-header">
+    <h1>Projects</h1>
+    <p>
+      Selected work from fintech and healthcare, each written up as the problem, what I did, and
+      what changed as a result.
+    </p>
+  </header>
+
+  @for (study of caseStudies; track study.slug) {
+    <mat-card class="case-study" [id]="study.slug">
+      <mat-card-header>
+        <mat-icon mat-card-avatar class="case-icon">{{ study.icon }}</mat-icon>
+        <h2 mat-card-title>{{ study.title }}</h2>
+        <mat-card-subtitle>{{ study.company }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="case-grid">
+          <section>
+            <h3>Problem</h3>
+            <p>{{ study.problem }}</p>
+          </section>
+          <section>
+            <h3>Approach</h3>
+            <ul>
+              @for (step of study.approach; track step) {
+                <li>{{ step }}</li>
+              }
+            </ul>
+          </section>
+          <section class="impact">
+            <h3>Impact</h3>
+            <ul>
+              @for (result of study.impact; track result) {
+                <li>{{ result }}</li>
+              }
+            </ul>
+          </section>
+        </div>
+
+        <mat-chip-set class="stack" [attr.aria-label]="study.title + ' technologies'">
+          @for (tech of study.stack; track tech) {
+            <mat-chip>{{ tech }}</mat-chip>
+          }
+        </mat-chip-set>
+      </mat-card-content>
+      @if (study.demoRoute) {
+        <mat-card-actions>
+          <a mat-flat-button [routerLink]="study.demoRoute">
+            <mat-icon>play_circle</mat-icon>
+            Try the live demo
+          </a>
+        </mat-card-actions>
+      }
+    </mat-card>
+  }
+</div>

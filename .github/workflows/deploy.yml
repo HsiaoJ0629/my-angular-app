@@ -2,9 +2,8 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - master  # Default branch
-  workflow_dispatch:  # Allows manual triggering
+    branches: [master]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,11 +11,12 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
   build:
+    name: Verify and build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,6 +31,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # The site is only published if it lints, passes its tests and builds.
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm run test:ci
+
       - name: Build for GitHub Pages
         run: npm run build:ghpages
 
@@ -43,6 +50,7 @@ jobs:
           path: './dist/my-angular-app/browser'
 
   deploy:
+    name: Deploy
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

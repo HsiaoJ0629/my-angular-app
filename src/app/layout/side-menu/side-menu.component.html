@@ -1,0 +1,42 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #sidenav
+    [mode]="isHandset() ? 'over' : 'side'"
+    [opened]="!isHandset()"
+    [attr.role]="isHandset() ? 'dialog' : 'navigation'"
+    aria-label="Site sections"
+  >
+    <mat-nav-list>
+      @for (link of links; track link.path) {
+        <a
+          mat-list-item
+          [routerLink]="link.path"
+          routerLinkActive
+          ariaCurrentWhenActive="page"
+          (click)="onNavLinkClick()"
+        >
+          <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
+          <span matListItemTitle>{{ link.label }}</span>
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <main #contentRef id="main-content" class="content" tabindex="-1" (scroll)="onContentScroll()">
+      <ng-content />
+
+      @if (showGoTop()) {
+        <button
+          class="go-top-btn"
+          type="button"
+          mat-stroked-button
+          aria-label="Scroll back to top"
+          (click)="goToTop()"
+        >
+          <mat-icon class="m-0">arrow_upward</mat-icon>
+        </button>
+      }
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,18 @@
+<mat-toolbar class="header-toolbar">
+  <button
+    mat-icon-button
+    class="menu-button"
+    type="button"
+    aria-label="Toggle navigation menu"
+    (click)="menuToggle.emit()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <a class="header-identity" routerLink="/home">
+    <span class="header-title">{{ site.name }}</span>
+    <span class="header-subtitle">{{ site.role }}</span>
+  </a>
+
+  <span class="spacer"></span>
+</mat-toolbar>

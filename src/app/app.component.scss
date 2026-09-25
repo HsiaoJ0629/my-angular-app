@@ -1,0 +1,21 @@
+/*
+ * Keyboard-only affordance: the skip link stays out of the layout until it
+ * receives focus, then appears above the toolbar.
+ */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.75rem 1.25rem;
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+  border-radius: 0 0 4px 0;
+  text-decoration: none;
+  transform: translateY(-120%);
+  transition: transform 150ms ease-in-out;
+
+  &:focus-visible {
+    transform: translateY(0);
+  }
+}

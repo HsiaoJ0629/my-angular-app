@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header>
+    <h2 mat-card-title>Skills</h2>
+    <mat-card-subtitle> Select a skill to highlight the roles where I used it. </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    @for (group of skillGroups; track group.category) {
+      <section class="skill-group">
+        <h3 class="skill-category">{{ group.category }}</h3>
+        <mat-chip-listbox
+          class="skill-chips"
+          [attr.aria-label]="group.category"
+          [value]="selected()"
+          (change)="selectSkill.emit($event.value ?? null)"
+        >
+          @for (item of group.items; track item) {
+            <mat-chip-option [value]="item">{{ item }}</mat-chip-option>
+          }
+        </mat-chip-listbox>
+      </section>
+    }
+  </mat-card-content>
+</mat-card>

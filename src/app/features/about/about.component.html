@@ -1,0 +1,14 @@
+<div class="about-container">
+  <h1 class="visually-hidden">About me</h1>
+  <div class="about-grid">
+    <div class="about-column left-column">
+      <app-summary />
+      <div class="spacing"></div>
+      <app-history [selection]="selection()" />
+    </div>
+    <div class="about-column right-column">
+      <app-skills [selected]="selection()?.skill ?? null" (selectSkill)="onSelectSkill($event)" />
+      <app-education />
+    </div>
+  </div>
+</div>

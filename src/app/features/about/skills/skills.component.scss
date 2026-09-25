@@ -15,15 +15,28 @@ mat-card {
   color: var(--mat-sys-inverse-primary);
 }
 
-mat-chip {
-  transition: all 0.3s ease;
-  
+.skill-group + .skill-group {
+  margin-top: 1.25rem;
+}
+
+.skill-category {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+mat-chip-option {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
   &:hover {
     transform: scale(1.05);
   }
-  
-  &[highlighted="true"] {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+  &[aria-selected='true'] {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 }
 

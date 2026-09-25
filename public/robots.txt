@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hsiaoj0629.github.io/my-angular-app/sitemap.xml

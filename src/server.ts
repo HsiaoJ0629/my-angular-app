@@ -38,14 +38,20 @@ app.use(
 );
 
 /**
+ * Health check. Must be registered before the catch-all below, otherwise the
+ * Angular handler claims the path first and this route is never reached.
+ */
+app.get('/api/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
+/**
  * Handle all other requests by rendering the Angular application.
  */
 app.use('/**', (req, res, next) => {
   angularApp
     .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then((response) => (response ? writeResponseToNodeResponse(response, res) : next()))
     .catch(next);
 });
 
@@ -59,12 +65,6 @@ if (isMainModule(import.meta.url)) {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
-
-// 🔽 Add Ping API
-app.get('/api/ping', (req, res) => {
-  res.status(200).send('pong');
-});
-
 
 /**
  * Request handler used by the Angular CLI (for dev-server and during build) or Firebase Cloud Functions.

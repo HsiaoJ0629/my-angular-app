@@ -1,0 +1,120 @@
+<div class="demo-container">
+  <mat-card class="demo-intro-card">
+    <mat-card-header>
+      <h1 mat-card-title>
+        <mat-icon class="section-icon">code</mat-icon>
+        Interactive demo — product management
+      </h1>
+      <mat-card-subtitle>Showcasing full stack development skills</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="demo-description">
+        This demo talks to the public DummyJSON REST API. Search, sorting and pagination are all
+        applied <strong>server-side</strong>, requests are debounced and cancelled as the query
+        changes, and failures surface as a retryable message rather than an endless spinner.
+      </p>
+      <mat-chip-set class="demo-features" aria-label="Demo capabilities">
+        <mat-chip><mat-icon>search</mat-icon>Debounced search</mat-chip>
+        <mat-chip><mat-icon>sort</mat-icon>Server-side sorting</mat-chip>
+        <mat-chip><mat-icon>view_list</mat-icon>Pagination</mat-chip>
+        <mat-chip><mat-icon>add_circle</mat-icon>CRUD operations</mat-chip>
+        <mat-chip><mat-icon>api</mat-icon>REST API integration</mat-chip>
+        <mat-chip><mat-icon>phone_android</mat-icon>Responsive design</mat-chip>
+      </mat-chip-set>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="demo-card">
+    <mat-card-header>
+      <h2 mat-card-title>
+        <mat-icon class="section-icon">inventory</mat-icon>
+        Product management
+      </h2>
+      <mat-card-subtitle>Search, sort and edit products</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="table-toolbar">
+        <mat-form-field class="search-field">
+          <mat-label>Search products</mat-label>
+          <input
+            matInput
+            type="search"
+            [value]="searchInput()"
+            (input)="onSearchInput($any($event.target).value)"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <button
+          mat-flat-button
+          type="button"
+          class="tertiary-btn add-button"
+          (click)="addProduct()"
+        >
+          <mat-icon>add</mat-icon>
+          Add product
+        </button>
+      </div>
+
+      @if (errorMessage(); as message) {
+        <div class="table-message error" role="alert">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ message }}</span>
+          <button mat-stroked-button type="button" (click)="reload()">Retry</button>
+        </div>
+      }
+
+      <div class="table-wrapper">
+        @if (isLoading()) {
+          <div class="loading-shade">
+            <mat-spinner diameter="48" />
+            <span class="visually-hidden" role="status">Loading products</span>
+          </div>
+        }
+
+        <table mat-table [dataSource]="products()" matSort (matSortChange)="onSortChange($event)">
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+            <td mat-cell *matCellDef="let product">{{ product.title }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+            <td mat-cell *matCellDef="let product">{{ product.price | currency: 'USD' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock</th>
+            <td mat-cell *matCellDef="let product">{{ product.stock }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let product; columns: displayedColumns"
+            class="clickable"
+            tabindex="0"
+            [attr.aria-label]="'Edit ' + product.title"
+            (click)="editProduct(product)"
+            (keydown.enter)="editProduct(product)"
+            (keydown.space)="$event.preventDefault(); editProduct(product)"
+          ></tr>
+        </table>
+
+        @if (isEmpty()) {
+          <p class="table-message empty">No products matched your search.</p>
+        }
+      </div>
+
+      <mat-paginator
+        [length]="totalCount()"
+        [pageIndex]="pageIndex()"
+        [pageSize]="pageSize()"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="onPageChange($event)"
+        aria-label="Select page of products"
+      />
+    </mat-card-content>
+  </mat-card>
+</div>

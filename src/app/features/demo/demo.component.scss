@@ -19,7 +19,7 @@
   line-height: 1.8;
   margin-bottom: 1.5rem;
   color: var(--mat-sys-on-surface);
-  
+
   strong {
     color: var(--mat-sys-inverse-primary);
     font-weight: 500;
@@ -30,7 +30,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  
+
   mat-chip {
     mat-icon {
       margin-right: 0.5rem;
@@ -48,13 +48,32 @@
   animation-fill-mode: both;
 }
 
-.example-loading-shade {
+.table-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.search-field {
+  flex: 1 1 260px;
+}
+
+.add-button {
+  // Nudge down so the button's baseline lines up with the form field's input.
+  margin-top: 0.5rem;
+}
+
+.table-wrapper {
+  position: relative;
+  min-height: 120px;
+}
+
+.loading-shade {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 56px;
-  right: 0;
-  background: rgba(0, 0, 0, 0.15);
+  inset: 0;
+  background: color-mix(in srgb, var(--mat-sys-surface) 60%, transparent);
   z-index: 1;
   display: flex;
   align-items: center;
@@ -62,12 +81,37 @@
   border-radius: 4px;
 }
 
+.table-message {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 8px;
+
+  &.error {
+    margin-top: 1rem;
+    background: var(--mat-sys-error-container);
+    color: var(--mat-sys-on-error-container);
+  }
+
+  &.empty {
+    justify-content: center;
+    opacity: 0.75;
+  }
+}
+
+.clickable:focus-visible {
+  outline: 2px solid var(--mat-sys-inverse-primary);
+  outline-offset: -2px;
+}
+
 table {
   width: 100%;
   margin-top: 1rem;
   overflow-x: auto;
   display: block;
-  
+
   @media (min-width: 769px) {
     display: table;
   }
@@ -78,7 +122,7 @@ table {
   .demo-card mat-card-content {
     overflow-x: auto;
   }
-  
+
   table {
     min-width: 600px; // Minimum width to prevent cramping
   }
@@ -99,11 +143,11 @@ table {
   .demo-container {
     padding: 1rem 0.5rem;
   }
-  
+
   .demo-features {
     mat-chip {
       font-size: 0.85rem;
-      
+
       mat-icon {
         font-size: 16px;
         width: 16px;
@@ -111,7 +155,7 @@ table {
       }
     }
   }
-  
+
   .demo-description {
     font-size: 0.95rem;
   }
@@ -121,7 +165,7 @@ table {
   .demo-container {
     padding: 0.75rem 0.25rem;
   }
-  
+
   mat-form-field {
     font-size: 0.9rem;
   }

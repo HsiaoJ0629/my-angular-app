@@ -1,0 +1,219 @@
+<div class="mfa-container">
+  <mat-card class="intro-card">
+    <mat-card-header>
+      <h1 mat-card-title>
+        <mat-icon class="section-icon">verified_user</mat-icon>
+        Interactive demo — multi-factor authentication
+      </h1>
+      <mat-card-subtitle>TOTP (RFC 6238) from first principles</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        I implemented OTP and TOTP second factors across Attvest's financial platforms. This page
+        re-implements TOTP with no libraries — just the Web Crypto API — and runs both halves in
+        your browser: the <strong>authenticator</strong> that shows a code, and the
+        <strong>server</strong> that decides whether to accept it.
+      </p>
+      <p>
+        The implementation is checked against every test vector in RFC 4226 and RFC 6238.
+        <a [href]="sourceUrl" target="_blank" rel="noopener noreferrer">
+          Read the source<span class="visually-hidden"> (opens in a new tab)</span>
+        </a>
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="panels">
+    <mat-card class="panel">
+      <mat-card-header>
+        <h2 mat-card-title>1. Authenticator</h2>
+        <mat-card-subtitle>What the user's phone shows</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="settings">
+          <mat-button-toggle-group
+            aria-label="HMAC algorithm"
+            [value]="algorithm()"
+            (change)="setAlgorithm($event.value)"
+          >
+            @for (option of algorithms; track option) {
+              <mat-button-toggle [value]="option">{{ option }}</mat-button-toggle>
+            }
+          </mat-button-toggle-group>
+          <mat-button-toggle-group
+            aria-label="Code length"
+            [value]="digits()"
+            (change)="setDigits($event.value)"
+          >
+            @for (option of digitOptions; track option) {
+              <mat-button-toggle [value]="option">{{ option }} digits</mat-button-toggle>
+            }
+          </mat-button-toggle-group>
+        </div>
+
+        <div class="current-code" aria-live="off">
+          <span class="code-label">Current code</span>
+          <span class="code-value" data-testid="current-code">
+            {{ codes()?.current ?? '—' }}
+          </span>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="progress()"
+            aria-label="Time left on the current code"
+          />
+          <span class="code-expiry">Expires in {{ secondsLeft() }} s</span>
+        </div>
+
+        <div class="code-actions">
+          <button
+            mat-flat-button
+            type="button"
+            [disabled]="!codes()"
+            (click)="useCode(codes()!.current)"
+          >
+            <mat-icon>input</mat-icon>
+            Use current code
+          </button>
+          <button
+            mat-stroked-button
+            type="button"
+            [disabled]="!codes()"
+            (click)="useCode(codes()!.previous)"
+          >
+            Use previous code
+          </button>
+          <button
+            mat-stroked-button
+            type="button"
+            [disabled]="!codes()"
+            (click)="useCode(codes()!.next)"
+          >
+            Use next code
+          </button>
+        </div>
+
+        <dl class="secret-details">
+          <dt>Shared secret (base32)</dt>
+          <dd>
+            <code data-testid="secret">{{ formattedSecret() || 'Generating…' }}</code>
+          </dd>
+          <dt>Key URI</dt>
+          <dd>
+            <code class="uri">{{ secretBase32() ? keyUri() : '' }}</code>
+          </dd>
+        </dl>
+        <p class="hint">
+          With SHA-1 and 6 digits, you can type this key into Google Authenticator or 1Password and
+          it will show the same codes.
+        </p>
+        <button mat-stroked-button type="button" (click)="newSecret()">
+          <mat-icon>autorenew</mat-icon>
+          New secret
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="panel">
+      <mat-card-header>
+        <h2 mat-card-title>2. Server verification</h2>
+        <mat-card-subtitle>Where the security decisions are made</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="verify-form" (submit)="$event.preventDefault(); verify()">
+          <mat-form-field class="code-field">
+            <mat-label>One-time code</mat-label>
+            <input
+              matInput
+              name="code"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              [attr.maxlength]="digits()"
+              [value]="codeInput()"
+              (input)="codeInput.set($any($event.target).value)"
+            />
+          </mat-form-field>
+          <button mat-flat-button type="submit" [disabled]="isVerifying() || !secret()">
+            <mat-icon>lock_open</mat-icon>
+            Verify
+          </button>
+        </form>
+
+        <div class="result" role="status">
+          @if (result(); as current) {
+            <p
+              class="result-message"
+              [class.accepted]="current.status === 'accepted'"
+              [class.refused]="current.status !== 'accepted'"
+            >
+              <mat-icon>{{ current.status === 'accepted' ? 'check_circle' : 'block' }}</mat-icon>
+              <span>{{ describe(current) }}</span>
+            </p>
+          }
+        </div>
+
+        <h3 class="policy-title">Try it</h3>
+        <ul class="policy">
+          <li>
+            <strong>Clock drift:</strong> the previous and next codes are accepted too (±{{
+              policy.window
+            }}
+            step), because phone clocks are rarely exact.
+          </li>
+          <li>
+            <strong>Replay protection:</strong> submit the same code twice — a code is single-use,
+            even inside its 30 s window.
+          </li>
+          <li>
+            <strong>Brute-force limit:</strong> with only 10<sup>{{ digits() }}</sup> possible
+            codes, {{ policy.maxFailedAttempts }} wrong attempts lock verification for
+            {{ policy.lockoutSeconds }} s.
+          </li>
+          <li>
+            <strong>Constant-time comparison:</strong> every window is checked in full so response
+            time does not leak how close a guess was.
+          </li>
+        </ul>
+
+        @if (attempts().length) {
+          <h3 class="policy-title">Recent attempts</h3>
+          <ol class="attempts" data-testid="attempts">
+            @for (attempt of attempts(); track attempt.id) {
+              <li [class.accepted]="attempt.accepted">
+                <code>{{ attempt.code }}</code>
+                <span>{{ attempt.message }}</span>
+              </li>
+            }
+          </ol>
+        }
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card class="how-card">
+    <mat-card-header>
+      <h2 mat-card-title>How a code is made</h2>
+    </mat-card-header>
+    <mat-card-content>
+      <ol class="steps">
+        <li>
+          <strong>Counter.</strong> T = floor(unix time ÷ 30), written as an 8-byte big-endian
+          integer. JavaScript's bitwise operators are 32-bit, so the counter is written as two
+          32-bit halves rather than shifted into place.
+        </li>
+        <li><strong>HMAC.</strong> HMAC-{{ algorithm() }}(shared secret, counter).</li>
+        <li>
+          <strong>Dynamic truncation.</strong> The low 4 bits of the last digest byte pick a 4-byte
+          window; its top bit is masked off to give a 31-bit integer.
+        </li>
+        <li>
+          <strong>Reduce.</strong> That integer modulo 10<sup>{{ digits() }}</sup
+          >, left-padded with zeros.
+        </li>
+      </ol>
+      <p class="note">
+        In production the secret lives only on the server and the phone, is stored encrypted, and
+        replay and lockout state is persisted per user rather than held in memory.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
